@@ -23,30 +23,7 @@ YAML_FILE=${TMP_DIR}/logdna-agent-key.yaml
 if [[ "${CLUSTER_TYPE}" == "kubernetes" ]]; then
     LOGDNA_AGENT_DS_YAML="https://assets.${REGION}.logging.cloud.ibm.com/clients/logdna-agent-ds.yaml"
 else
-    KUSTOMIZE_TEMPLATE="${MODULE_DIR}/kustomize"
-    LOGDNA_PATCH_TEMPLATE="${KUSTOMIZE_TEMPLATE}/logdna-os/patch-daemonset.yaml"
-
-    KUSTOMIZE_DIR="${TMP_DIR}/kustomize"
-    LOGDNA_KUSTOMIZE="${KUSTOMIZE_DIR}/logdna-os"
-    LOGDNA_BASE_YAML="${LOGDNA_KUSTOMIZE}/base.yaml"
-    LOGDNA_PATCH_YAML="${LOGDNA_KUSTOMIZE}/patch-daemonset.yaml"
-
-    mkdir -pv "${KUSTOMIZE_DIR}"
-    echo "*** Copying ${KUSTOMIZE_TEMPLATE}/* to ${KUSTOMIZE_DIR}"
-    cp -Rv "${KUSTOMIZE_TEMPLATE}"/* "${KUSTOMIZE_DIR}"
-
-    curl https://raw.githubusercontent.com/logdna/logdna-agent/master/logdna-agent-ds-os.yaml -o "${LOGDNA_BASE_YAML}"
-
-    LOGDNA_API_HOST="api.${REGION}.logging.cloud.ibm.com"
-    LOGDNA_LOG_HOST="logs.${REGION}.logging.cloud.ibm.com"
-
-    cat "${LOGDNA_PATCH_TEMPLATE}" | \
-      sed "s/LDAPIHOST_VALUE/${LOGDNA_API_HOST}/g" | \
-      sed "s/LDLOGHOST_VALUE/${LOGDNA_LOG_HOST}/g" > ${LOGDNA_PATCH_YAML}
-
-    LOGDNA_AGENT_DS_YAML="${TMP_DIR}/logdna-agent-ds-os.yaml"
-
-    kustomize build "${LOGDNA_KUSTOMIZE}" > "${LOGDNA_AGENT_DS_YAML}"
+    LOGDNA_AGENT_DS_YAML="https://assets.${REGION}.logging.cloud.ibm.com/clients/logdna-agent-ds-os.yaml"
 fi
 
 echo "*** Creating logdna-agent-key secret in ${NAMESPACE}"
