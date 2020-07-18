@@ -110,7 +110,7 @@ resource "helm_release" "service-account" {
 
   set {
     name  = "sccs"
-    value = ["anyuid", "privileged"]
+    value = "{anyuid, privileged}"
   }
 }
 
