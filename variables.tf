@@ -8,22 +8,6 @@ variable "resource_location" {
   description = "Geographic location of the resource (e.g. us-south, us-east)"
 }
 
-variable "cluster_config_file_path" {
-  type        = string
-  description = "The path to the config file for the cluster"
-}
-
-variable "cluster_type" {
-  type        = string
-  description = "The type of cluster that should be created (openshift or ocp3 or ocp4 or kubernetes)"
-}
-
-variable "service_account_name" {
-  type        = string
-  description = "The service account that the logdna agent should run under"
-  default     = "logdna-agent"
-}
-
 variable "name_prefix" {
   type        = string
   description = "The prefix name for the service. If not provided it will default to the resource group name"
@@ -36,26 +20,50 @@ variable "plan" {
   default     = "7-day"
 }
 
-variable "namespace" {
-  type        = string
-  description = "The namespace where the agent should be deployed"
-  default     = "ibm-observe"
-}
-
 variable "tags" {
   type        = list(string)
   description = "Tags that should be applied to the service"
   default     = []
 }
 
-variable "exists" {
+variable "provision" {
   type        = bool
-  description = "Flag indicating that logdna instance already exists"
+  description = "Flag indicating that logdna instance should be provisioned"
   default     = false
 }
 
 variable "name" {
   type        = string
   description = "The name that should be used for the service, particularly when connecting to an existing service. If not provided then the name will be defaulted to {name prefix}-{service}"
+  default     = ""
+}
+
+variable "service_account_name" {
+  type        = string
+  description = "The service account that the logdna agent should run under"
+  default     = "logdna-agent"
+}
+
+variable "namespace" {
+  type        = string
+  description = "The namespace where the agent should be deployed"
+  default     = "ibm-observe"
+}
+
+variable "cluster_config_file_path" {
+  type        = string
+  description = "The path to the config file for the cluster"
+  default     = ""
+}
+
+variable "cluster_type" {
+  type        = string
+  description = "The type of cluster that should be created (openshift or ocp3 or ocp4 or kubernetes)"
+  default     = ""
+}
+
+variable "base_icon_url" {
+  type        = string
+  description = "The base url where the logos for the application menu can be found"
   default     = ""
 }
