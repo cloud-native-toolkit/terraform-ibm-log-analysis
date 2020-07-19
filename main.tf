@@ -27,7 +27,7 @@ locals {
 
 resource "null_resource" "logging" {
   provisioner "local-exec" {
-    command = "echo 'provision: ${local.provision}, bind: ${local.bind}"
+    command = "echo 'provision: ${local.provision}, bind: ${local.bind}'"
   }
 }
 
