@@ -1,5 +1,6 @@
 provider "ibm" {
   version = ">= 1.2.1"
+  region  = var.resource_location
 }
 
 provider "helm" {
