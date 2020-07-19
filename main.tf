@@ -25,8 +25,15 @@ locals {
   image_url         = var.base_icon_url != "" ? "${var.base_icon_url}/logdna" : ""
 }
 
+resource "null_resource" "logging" {
+  provisioner "local-exec" {
+    command = "echo 'provision: ${local.provision}, bind: ${local.bind}"
+  }
+}
+
 // LogDNA - Logging
 resource "ibm_resource_instance" "logdna_instance" {
+  depends_on = [null_resource.logging]
   count             = local.provision ? 1 : 0
 
   name              = local.name
