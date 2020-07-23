@@ -83,12 +83,12 @@ resource "null_resource" "logdna_bind" {
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/bind-logdna.sh ${self.triggers.cluster_id} ${self.triggers.instance_id} ${ibm_resource_key.logdna_instance_key[0].name}"
+    command = "${path.module}/scripts/bind-instance.sh ${self.triggers.cluster_id} ${self.triggers.instance_id} ${ibm_resource_key.logdna_instance_key[0].name}"
   }
 
   provisioner "local-exec" {
     when    = destroy
-    command = "${path.module}/scripts/unbind-logdna.sh ${self.triggers.cluster_id} ${self.triggers.instance_id}"
+    command = "${path.module}/scripts/unbind-instance.sh ${self.triggers.cluster_id} ${self.triggers.instance_id}"
   }
 }
 
