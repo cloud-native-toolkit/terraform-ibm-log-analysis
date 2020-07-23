@@ -7,8 +7,26 @@ CLUSTER_ID="$1"
 INSTANCE_ID="$2"
 INGESTION_KEY="$3"
 
+echo "Configuring LogDNA for ${CLUSTER_ID} cluster and ${INSTANCE_ID} LogDNA instance"
+
+if ibmcloud ob logging config ls --cluster "${CLUSTER_ID}" | grep -q "Instance ID"; then
+  EXISTING_INSTANCE_ID=$(ibmcloud ob logging config ls --cluster "${CLUSTER_ID}" | grep "Instance ID" | sed -E "s/Instance ID: +([^ ]+)/\1/g")
+  if [[ "${EXISTING_INSTANCE_ID}" == "${INSTANCE_ID}" ]]; then
+    echo "LogDNA configuration already exists on this cluster"
+    exit 0
+  else
+    echo "Existing LogDNA configuration found on this cluster for a different LogDNA instance: ${EXISTING_INSTANCE_ID}."
+    echo "Removing the config before creating the new one"
+    ibmcloud ob logging config delete \
+      --cluster "${CLUSTER_ID}" \
+      --instance "${INSTANCE_ID}" \
+      --force
+  fi
+fi
+
 set -e
 
+echo "Creating LogDNA configuration for ${CLUSTER_ID} cluster and ${INSTANCE_ID} LogDNA instance"
 ibmcloud ob logging config create \
   --cluster "${CLUSTER_ID}" \
   --instance "${INSTANCE_ID}" \
