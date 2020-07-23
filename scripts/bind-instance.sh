@@ -22,6 +22,9 @@ if ibmcloud ob logging config ls --cluster "${CLUSTER_ID}" | grep -q "Instance n
       --instance "${EXISTING_INSTANCE_NAME}" \
       --force
   fi
+else
+  echo "No existing logging config found for ${CLUSTER_ID} cluster"
+  ibmcloud ob logging config ls --cluster "${CLUSTER_ID}"
 fi
 
 set -e
