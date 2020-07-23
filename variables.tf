@@ -55,14 +55,14 @@ variable "cluster_config_file_path" {
   default     = ""
 }
 
-variable "cluster_type" {
+variable "cluster_id" {
   type        = string
-  description = "The type of cluster that should be created (openshift or ocp3 or ocp4 or kubernetes)"
+  description = "The identifier for the cluster"
   default     = ""
 }
 
-variable "base_icon_url" {
+variable "cluster_type" {
   type        = string
-  description = "The base url where the logos for the application menu can be found"
+  description = "The type of cluster that should be created (openshift or ocp3 or ocp4 or kubernetes)"
   default     = ""
 }

@@ -1,13 +1,12 @@
-defdd#!/usr/bin/env bash
+#!/usr/bin/env bash
 
-NAMESPACE="$1"
+SCRIPT_DIR=$(cd $(dirname $0); pwd -P)
+MODULE_DIR=$(cd ${SCRIPT_DIR}/..; pwd -P)
 
-if [[ -n "${KUBECONFIG_IKS}" ]]; then
-   export KUBECONFIG="${KUBECONFIG_IKS}"
-fi
+CLUSTER_ID="$1"
+INSTANCE_ID="$2"
 
-echo "*** Creating logdna-agent-key secret in ${NAMESPACE}"
-kubectl delete -n ${NAMESPACE} secret/logdna-agent-key
-
-echo "*** Creating logdna-agent daemon set in ${NAMESPACE}"
-kubectl delete -n ${NAMESPACE} ds/logdna-agent
+ibmcloud ob logging config delete \
+  --cluster "${CLUSTER_ID}" \
+  --instance "${INSTANCE_ID}" \
+  --force
