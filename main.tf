@@ -84,6 +84,10 @@ resource "null_resource" "logdna_bind" {
 
   provisioner "local-exec" {
     command = "${path.module}/scripts/bind-instance.sh ${self.triggers.cluster_id} ${self.triggers.instance_id} ${ibm_resource_key.logdna_instance_key[0].name}"
+
+    environment = {
+      SYNC = var.sync
+    }
   }
 
   provisioner "local-exec" {
