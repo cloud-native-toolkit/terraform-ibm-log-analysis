@@ -9,6 +9,7 @@ INGESTION_KEY="$3"
 
 echo "Configuring LogDNA for ${CLUSTER_ID} cluster and ${INSTANCE_NAME} LogDNA instance"
 
+ibmcloud target
 if ibmcloud ob logging config ls --cluster "${CLUSTER_ID}" | grep -q "Instance name"; then
   EXISTING_INSTANCE_NAME=$(ibmcloud ob logging config ls --cluster "${CLUSTER_ID}" | grep "Instance name" | sed -E "s/Instance name: +([^ ]+)/\1/g")
   if [[ "${EXISTING_INSTANCE_NAME}" == "${INSTANCE_NAME}" ]]; then
