@@ -63,7 +63,7 @@ variable "cluster_id" {
 
 variable "cluster_type" {
   type        = string
-  description = "The type of cluster that should be created (openshift or ocp3 or ocp4 or kubernetes)"
+  description = "The type of cluster referenced by cluster_id (openshift or ocp3 or ocp4 or kubernetes)"
   default     = ""
 }
 

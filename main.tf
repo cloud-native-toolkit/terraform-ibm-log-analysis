@@ -100,7 +100,7 @@ resource "null_resource" "delete-consolelink" {
   count = var.cluster_type == "ocp4" && local.bind ? 1 : 0
 
   provisioner "local-exec" {
-    command = "kubectl delete consolelink -l grouping=garage-cloud-native-toolkit -l app=logdna || exit 0"
+    command = "kubectl delete consolelink -l grouping=garage-cloud-native-toolkit -l app=logdna --ignore-not-found || exit 0"
 
     environment = {
       KUBECONFIG = var.cluster_config_file_path
