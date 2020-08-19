@@ -1,5 +1,5 @@
 provider "ibm" {
-  version = ">= 1.2.1"
+  version = ">= 1.9.0"
   region  = var.resource_location
 }
 
@@ -22,7 +22,7 @@ locals {
   name              = var.name != "" ? var.name : "${replace(local.name_prefix, "/[^a-zA-Z0-9_\\-\\.]/", "")}-logdna"
   role              = "Manager"
   provision         = var.provision
-  bind              = (var.provision || (!var.provision && var.name != "")) && var.cluster_id != ""
+  bind              = (var.provision || (!var.provision && var.name != "")) && var.cluster_name != ""
 }
 
 // LogDNA - Logging
@@ -79,7 +79,7 @@ resource "null_resource" "logdna_bind" {
 
   triggers = {
     cluster_id  = var.cluster_id
-    instance_id = var.name
+    instance_id = data.ibm_resource_instance.logdna_instance[0].guid
   }
 
   provisioner "local-exec" {
@@ -100,7 +100,7 @@ resource "null_resource" "delete-consolelink" {
   count = var.cluster_type == "ocp4" && local.bind ? 1 : 0
 
   provisioner "local-exec" {
-    command = "kubectl delete consolelink -l grouping=garage-cloud-native-toolkit -l app=logdna || exit 0"
+    command = "kubectl delete consolelink -l grouping=garage-cloud-native-toolkit -l app=logdna --ignore-not-found || exit 0"
 
     environment = {
       KUBECONFIG = var.cluster_config_file_path

@@ -55,6 +55,12 @@ variable "cluster_config_file_path" {
   default     = ""
 }
 
+variable "cluster_name" {
+  type        = string
+  description = "The name of the cluster"
+  default     = ""
+}
+
 variable "cluster_id" {
   type        = string
   description = "The identifier for the cluster"
@@ -63,7 +69,7 @@ variable "cluster_id" {
 
 variable "cluster_type" {
   type        = string
-  description = "The type of cluster that should be created (openshift or ocp3 or ocp4 or kubernetes)"
+  description = "The type of cluster referenced by cluster_id (openshift or ocp3 or ocp4 or kubernetes)"
   default     = ""
 }
 
