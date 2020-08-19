@@ -79,7 +79,7 @@ resource "null_resource" "logdna_bind" {
 
   triggers = {
     cluster_id  = var.cluster_id
-    instance_id = data.ibm_resource_instance.logdna_instance.id
+    instance_id = data.ibm_resource_instance.logdna_instance[0].id
   }
 
   provisioner "local-exec" {
