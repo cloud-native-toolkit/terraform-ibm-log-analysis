@@ -64,6 +64,7 @@ jobs:
 
       # Destroy
       - name: Destroy ${{ matrix.platform }}
+        if: ${{ always() }}
         run: |
           cd /tmp/workspace
           ./destroy.sh
