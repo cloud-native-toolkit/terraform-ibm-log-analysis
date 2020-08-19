@@ -13,7 +13,7 @@ jobs:
   verify:
     if: ${{ !contains( github.event.pull_request.labels.*.name, 'skip ci' ) }}
     runs-on: ubuntu-latest
-    container: ibmgaragecloud/cli-tools:0.6.0-lite
+    container: ibmgaragecloud/cli-tools:0.7.0-lite
 
     strategy:
       matrix:

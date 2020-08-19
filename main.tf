@@ -1,5 +1,5 @@
 provider "ibm" {
-  version = ">= 1.2.1"
+  version = ">= 1.9.0"
   region  = var.resource_location
 }
 
