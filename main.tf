@@ -22,7 +22,7 @@ locals {
   name              = var.name != "" ? var.name : "${replace(local.name_prefix, "/[^a-zA-Z0-9_\\-\\.]/", "")}-logdna"
   role              = "Manager"
   provision         = var.provision
-  bind              = (var.provision || (!var.provision && var.name != "")) && var.cluster_id != ""
+  bind              = (var.provision || (!var.provision && var.name != "")) && var.cluster_name != ""
 }
 
 // LogDNA - Logging
