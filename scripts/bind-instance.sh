@@ -6,6 +6,13 @@ MODULE_DIR=$(cd ${SCRIPT_DIR}/..; pwd -P)
 CLUSTER_ID="$1"
 INSTANCE_ID="$2"
 INGESTION_KEY="$3"
+PRIVATE="$4"
+
+if [[ "${PRIVATE}" == "true" ]]; then
+  PRIVATE="--private-endpoint"
+else
+  PRIVATE=""
+fi
 
 echo "Configuring LogDNA for ${CLUSTER_ID} cluster and ${INSTANCE_ID} LogDNA instance"
 
@@ -34,4 +41,4 @@ echo "Creating LogDNA configuration for ${CLUSTER_ID} cluster and ${INSTANCE_ID}
 ibmcloud ob logging config create \
   --cluster "${CLUSTER_ID}" \
   --instance "${INSTANCE_ID}" \
-  --logdna-ingestion-key "${INGESTION_KEY}"
+  --logdna-ingestion-key "${INGESTION_KEY}" ${PRIVATE}
