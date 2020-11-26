@@ -5,6 +5,7 @@ tags:
     - tools
     - devops
     - logdna
+    - logging
 versions:
 - platforms:
     - kubernetes
