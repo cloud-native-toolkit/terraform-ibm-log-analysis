@@ -1,6 +1,6 @@
 provider "ibm" {
   version = ">= 1.9.0"
-  region  = var.resource_location
+  region  = var.region
 }
 
 provider "helm" {
@@ -32,7 +32,7 @@ resource "ibm_resource_instance" "logdna_instance" {
   name              = local.name
   service           = "logdna"
   plan              = var.plan
-  location          = var.resource_location
+  location          = var.region
   resource_group_id = data.ibm_resource_group.tools_resource_group.id
   tags              = var.tags
 
@@ -49,7 +49,7 @@ data "ibm_resource_instance" "logdna_instance" {
 
   name              = local.name
   resource_group_id = data.ibm_resource_group.tools_resource_group.id
-  location          = var.resource_location
+  location          = var.region
   service           = "logdna"
 }
 
