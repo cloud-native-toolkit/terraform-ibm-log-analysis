@@ -67,12 +67,6 @@ variable "cluster_id" {
   default     = ""
 }
 
-variable "cluster_type" {
-  type        = string
-  description = "The type of cluster referenced by cluster_id (openshift or ocp3 or ocp4 or kubernetes)"
-  default     = ""
-}
-
 variable "sync" {
   type        = string
   description = "Semaphore to synchronize activities between modules"
