@@ -27,23 +27,23 @@ versions:
       moduleRef:
         id: cluster
         output: id
-        optional: true
+      optional: true
     - name: cluster_name
       moduleRef:
         id: cluster
         output: name
-        optional: true
+      optional: true
     - name: cluster_config_file_path
       moduleRef:
         id: cluster
         output: platform.kubeconfig
-        optional: true
+      optional: true
     - name: tools_namespace
       moduleRef:
         id: namespace
         output: name
         discriminator: tools
-        optional: true
+      optional: true
     - name: resource_group_name
       scope: global
     - name : region
