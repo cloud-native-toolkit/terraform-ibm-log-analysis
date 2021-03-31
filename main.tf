@@ -109,7 +109,7 @@ resource null_resource cluster_type {
   depends_on = [null_resource.create_tmp_dir]
 
   provisioner "local-exec" {
-    command = "k api-resources -o name | grep consolelink && echo -n 'ocp4' > ${local.cluster_type_file}"
+    command = "kubectl api-resources -o name | grep consolelink && echo -n 'ocp4' > ${local.cluster_type_file}"
   }
 }
 
@@ -123,7 +123,7 @@ resource "null_resource" "delete-consolelink" {
   count = local.bind ? 1 : 0
 
   provisioner "local-exec" {
-    command = "k api-resources -o name | grep consolelink && kubectl delete consolelink -l grouping=garage-cloud-native-toolkit -l app=logdna --ignore-not-found || exit 0"
+    command = "kubectl api-resources -o name | grep consolelink && kubectl delete consolelink -l grouping=garage-cloud-native-toolkit -l app=logdna --ignore-not-found || exit 0"
 
     environment = {
       KUBECONFIG = var.cluster_config_file_path
