@@ -1,6 +1,5 @@
 output "id" {
-  value       = local.name
-  depends_on  = [data.ibm_resource_instance.logdna_instance.id]
+  value       = data.ibm_resource_instance.logdna_instance.id
   description = "The id of the provisioned LogDNA instance."
 }
 
