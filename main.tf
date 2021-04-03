@@ -1,10 +1,11 @@
 
 locals {
-  tmp_dir           = "${path.cwd}/.tmp"
-  name_prefix       = var.name_prefix != "" ? var.name_prefix : var.resource_group_name
-  name              = var.name != "" ? var.name : "${replace(local.name_prefix, "/[^a-zA-Z0-9_\\-\\.]/", "")}-logdna"
-  role              = "Manager"
-  provision         = var.provision
+  tmp_dir     = "${path.cwd}/.tmp"
+  name_prefix = var.name_prefix != "" ? var.name_prefix : var.resource_group_name
+  name        = var.name != "" ? var.name : "${replace(local.name_prefix, "/[^a-zA-Z0-9_\\-\\.]/", "")}-logdna"
+  key_name    = "${local.name}-key"
+  role        = "Manager"
+  provision   = var.provision
 }
 
 resource null_resource print_names {
@@ -37,11 +38,23 @@ resource "ibm_resource_instance" "logdna_instance" {
   }
 }
 
-data "ibm_resource_instance" "logdna_instance" {
+data ibm_resource_instance logdna_instance {
   depends_on = [ibm_resource_instance.logdna_instance]
 
   name              = local.name
   resource_group_id = data.ibm_resource_group.resource_group.id
   location          = var.region
   service           = "logdna"
+}
+
+resource ibm_resource_key logdna_instance_key {
+
+  name                 = local.key_name
+  resource_instance_id = data.ibm_resource_instance.logdna_instance.id
+  role                 = local.role
+
+  timeouts {
+    create = "15m"
+    delete = "15m"
+  }
 }
