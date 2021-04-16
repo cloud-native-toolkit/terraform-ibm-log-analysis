@@ -7,10 +7,7 @@ tags:
     - logdna
     - logging
 versions:
-- platforms:
-    - kubernetes
-    - ocp3
-    - ocp4
+- platforms: []
   dependencies:
     - id: resource_group
       refs:
