@@ -41,5 +41,5 @@ variable "name" {
 variable "label" {
   type        = string
   description = "The label used to build the resource name if not provided"
-  default     = "logdna"
+  default     = "logging"
 }
