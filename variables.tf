@@ -37,3 +37,9 @@ variable "name" {
   description = "The name that should be used for the service, particularly when connecting to an existing service. If not provided then the name will be defaulted to {name prefix}-{service}"
   default     = ""
 }
+
+variable "label" {
+  type        = string
+  description = "The label used to build the resource name if not provided"
+  default     = "logdna"
+}
