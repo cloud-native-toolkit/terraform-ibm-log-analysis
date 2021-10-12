@@ -5,4 +5,5 @@ module "logdna" {
   region                   = var.region
   provision                = true
   name_prefix              = var.name_prefix
+  ibmcloud_api_key         = var.ibmcloud_api_key
 }
