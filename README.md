@@ -1,6 +1,6 @@
-# IBM Cloud LogDNA service terraform module
+# IBM Cloud Log Analysis service terraform module
 
-Module to provision a LogDNA instance.
+Module to provision a Log Analysis instance on IBM Cloud.
 
 **Note:** This module follows the Terraform conventions regarding how provider configuration is defined within the Terraform template and passed into the module - https://www.terraform.io/docs/language/modules/develop/providers.html. The default provider configuration flows through to the module. If different configuration is required for a module, it can be explicitly passed in the `providers` block of the module - https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly.
 
@@ -37,8 +37,8 @@ provider "ibm" {
   region = var.region
 }
 
-module "logdna" {
-  source = "github.com/cloud-native-toolkit/terraform-ibm-logdna.git"
+module "log-analysis" {
+  source = "github.com/cloud-native-toolkit/terraform-ibm-log-analysis.git"
 
   resource_group_name      = module.resource_group.name
   region                   = var.region
