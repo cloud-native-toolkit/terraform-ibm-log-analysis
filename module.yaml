@@ -1,4 +1,4 @@
-name: ibm-log-anaysis
+name: ibm-log-analysis
 alias: logdna
 registryId: cloud-native-toolkit/log-analysis/ibm
 type: terraform
