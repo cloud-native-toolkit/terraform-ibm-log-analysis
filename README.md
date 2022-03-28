@@ -38,7 +38,7 @@ provider "ibm" {
 }
 
 module "log-analysis" {
-  source = "github.com/cloud-native-toolkit/terraform-ibm-log-analysis.git"
+  source = "cloud-native-toolkit/log-analysis/ibm"
 
   resource_group_name      = module.resource_group.name
   region                   = var.region
