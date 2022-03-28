@@ -1,11 +1,12 @@
-name: logdna
+name: ibm-log-anaysis
+alias: logdna
 type: terraform
-description: Module to provision a LogDNA instance
+description: Module to provision a IBM Log Anaysis instance on IBM Cloud
 tags:
     - tools
     - devops
-    - logdna
-    - logging
+    - log analysis
+    - ibm
 versions:
 - platforms: []
   providers:
