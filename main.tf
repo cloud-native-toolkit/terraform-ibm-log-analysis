@@ -48,8 +48,13 @@ data ibm_resource_instance instance {
   service           = local.service
 }
 
-resource ibm_resource_key logdna_instance_key {
+resource "null_resource" "print_guid" {
+  provisioner "local-exec" {
+    command = "echo '${jsonencode({id = data.ibm_resource_instance.instance.id, guid = data.ibm_resource_instance.instance.guid})}'"
+  }
+}
 
+resource ibm_resource_key logdna_instance_key {
   name                 = local.key_name
   resource_instance_id = data.ibm_resource_instance.instance.id
   role                 = local.role
