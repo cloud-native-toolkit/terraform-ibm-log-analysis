@@ -1,6 +1,6 @@
 name: ibm-log-analysis
 alias: logdna
-registryId: cloud-native-toolkit/log-analysis/ibm
+#registryId: cloud-native-toolkit/log-analysis/ibm
 type: terraform
 description: Module to provision a IBM Log Anaysis instance on IBM Cloud
 tags:
